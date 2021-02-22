@@ -1,17 +1,8 @@
-# Frontendkurs 2020
+# Shriek-kurs 2021
 
 ## Start
 
-Avhengigheter:
-
-```
+```bash
 yarn
-```
-
-Oppstart med en av:
-
-```
-start:accessibility
-start:react-typescript
-start:react-hooks
+yarn start
 ```
