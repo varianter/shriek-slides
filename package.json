@@ -1,0 +1,12 @@
+{
+  "name": "@variant/course-git",
+  "private": true,
+  "devDependencies": {
+    "code-surfer": "3.0.0",
+    "mdx-deck": "3.0.13"
+  },
+  "scripts": {
+    "start": "mdx-deck ./shriek/deck.mdx",
+    "build": "sh build.sh"
+  }
+}

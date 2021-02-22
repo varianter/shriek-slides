@@ -1,0 +1,86 @@
+import {
+  CodeSurfer,
+  CodeSurferColumns,
+  Step,
+} from 'code-surfer';
+
+import {
+  Image,
+  Invert,
+  Notes,
+  Split,
+  SplitRight,
+  Appear,
+  Head,
+} from 'mdx-deck';
+
+import { github, dracula } from '@code-surfer/themes';
+import customTheme from '../custom-theme';
+export const theme = customTheme(dracula);
+
+import ImageLayout from '../image-split-layout';
+import * as imgs from '../images';
+
+<Head>
+  <title>Shriek!</title>
+  {Object.values(imgs).map(function (img) {
+    <link rel="preload" as="image" href={img} />;
+  })}
+</Head>
+
+<Image
+  src={imgs.bg}
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingRight: '1rem',
+    color: 'black',
+    backgroundColor: 'black',
+  }}
+>
+
+
+# Shriek
+
+</Image>
+
+
+<Notes>
+
+
+Notes
+
+</Notes>
+
+
+---
+
+<CodeSurfer>
+
+
+```js
+function a() {}
+```
+
+```js 2
+function a() {}
+function b() {}
+```
+
+</CodeSurfer>
+
+
+<Notes>
+ function a
+ function b
+
+
+</Notes>
+
+
+---
+
+Text
+
+<Notes>More notes</Notes>
