@@ -77,6 +77,21 @@ async function getMediaStream() {
   const video = document.querySelector('video');
   video.srcObject = mediaStream;
 }
+
+// Du må ha et video-element i DOM:
+// <video autoPlay />
+```
+
+```diff 2[29:63] subtitle="Kalle getUserMedia"
+
+```
+
+```diff 4 subtitle="Send inn at du vil ha video"
+
+```
+
+```diff 8,9 subtitle="Sette stream til video-elementet som finnes i DOM"
+
 ```
 
 </CodeSurfer>
@@ -84,8 +99,38 @@ async function getMediaStream() {
 
 ---
 
-Text
+Voila!
 
 <VideoUserMedia />
 
 <Notes>More notes</Notes>
+
+---
+
+<CodeSurfer>
+
+
+```ts subtitle="I stedet for å be om video"
+async function getMediaStream() {
+  const mediaStream = await navigator.mediaDevices.getUserMedia(
+    {
+      video: true,
+    },
+  );
+}
+```
+
+```ts subtitle="Se kan du be om audio"
+async function getMediaStream() {
+  const mediaStream = await navigator.mediaDevices.getUserMedia(
+    {
+      audio: true,
+    },
+  );
+}
+```
+
+</CodeSurfer>
+
+
+---
