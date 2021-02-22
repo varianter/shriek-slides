@@ -20,6 +20,7 @@ export const theme = customTheme(dracula);
 
 import ImageLayout from '../image-split-layout';
 import * as imgs from '../images';
+import VideoUserMedia from '../video-user-media';
 
 <Head>
   <title>Shriek!</title>
@@ -49,38 +50,42 @@ import * as imgs from '../images';
 <Notes>
 
 
-Notes
+Med programmering i verktøy beltet kan du gjøre det utroligste. På sitt beste kan det revolusjonere verden, på sitt verste ødelegge for generasjoner. ...eller du kan lage ditt eget spill som styres av deg og din venns evne til å rope høyt og ukontrollert. I dette kurset ser vi på hvordan vi kan bruke innebygde API-er i nettleseren, litt matematikk og en dose kreativitet til å lage vår egen utgave av Supermarked Shriek.
 
 </Notes>
 
+
+---
+
+## User Media
+
+I nettleser API som omhandler "User Media" kan du be om tilgang til kamera eller mikrofon.
 
 ---
 
 <CodeSurfer>
 
 
-```js
-function a() {}
-```
+```ts subtitle="Det å lytte på webkamera kan gjøres på noen få linjer"
+async function getMediaStream() {
+  const mediaStream = await navigator.mediaDevices.getUserMedia(
+    {
+      video: true,
+    },
+  );
 
-```js 2
-function a() {}
-function b() {}
+  const video = document.querySelector('video');
+  video.srcObject = mediaStream;
+}
 ```
 
 </CodeSurfer>
 
 
-<Notes>
- function a
- function b
-
-
-</Notes>
-
-
 ---
 
 Text
+
+<VideoUserMedia />
 
 <Notes>More notes</Notes>
