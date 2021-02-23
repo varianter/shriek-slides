@@ -1,2 +1,9 @@
 export { default as bg } from './assets/variant-bg.png';
 export { default as audioContext } from './assets/audiocontext.png';
+export { default as gameLoop } from './assets/gameloop.png';
+export { default as crp } from './assets/crp.png';
+export { default as repaint } from './assets/repaint.png';
+export { default as repaintFaded } from './assets/repaint-faded.png';
+export { default as eventloop } from './assets/eventloop.gif';
+export { default as repaintDelay } from './assets/repaint-delay.png';
+export { default as repaintYank } from './assets/repaint-yank.png';

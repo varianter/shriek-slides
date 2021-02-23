@@ -336,3 +336,222 @@ source
 
 </CodeSurfer>
 
+
+---
+
+## Pause (10min)
+
+---
+
+## Spill og game loops
+
+Kontinuerlige og gradvise tilstandsendringer
+
+<Notes>
+  Et ganske kjent konsept for både spill men og generell
+  moderne web arkitektur nå. Konseptet går ut på at du
+  sender tilstand inn til et system, gjør nødvendige
+  endringer på systemet og outputter det.
+</Notes>
+
+---
+
+<Image src={imgs.gameLoop} />
+
+---
+
+<CodeSurfer>
+
+
+```ts
+let someInput = {};
+while (true) {
+  manipulateSomeInput(someInput);
+  draw(someInput);
+}
+```
+
+```diff 1
+
+```
+
+```diff 3
+
+```
+
+```diff 4
+
+```
+
+```diff 2,5
+
+```
+
+```diff subtitle="Men dette vil ikke fungere bra i nettleseren"
+
+```
+
+</CodeSurfer>
+
+
+---
+
+## Single threaded
+
+I dette eksemplet vil vi oppta CPU-en hele tiden. Det vil også være
+veldig mye unødvendig arbeid.
+
+---
+
+## Spre ut over tid
+
+Vi ønsker gjerne rundt `60fps` for at det ikke skal oppleves dårlig.
+Det betyr at vi skal gjøre endringer `1000ms/60 = 16ms`.
+
+---
+
+<Image
+  src={imgs.crp}
+  style={{
+    backgroundSize: 'contain',
+    backgroundColor: '#fff',
+  }}
+/>
+
+<Notes>
+  Faktisk så er det slik at nettleseren uansett bare
+  oppdaterer periodisk. Dette kalles ofte Critical Render
+  Path.
+</Notes>
+
+---
+
+<Image src={imgs.repaint} />
+
+---
+
+<Image src={imgs.repaintFaded} />
+
+---
+
+## `setInterval` eller `setTimeout` til unnsetning?
+
+---
+
+<Image src={imgs.eventloop} />
+
+---
+
+<CodeSurfer>
+
+
+```ts
+let someInput = {};
+while (true) {
+  manipulateSomeInput(someInput);
+  draw(someInput);
+}
+```
+
+```ts
+let someInput = {};
+setInterval(function () {
+  manipulateSomeInput(someInput);
+  draw(someInput);
+}, 1000 / 60); // 60fps
+```
+
+```diff subtitle="👍?"
+
+```
+
+```diff subtitle="👎!"
+
+```
+
+</CodeSurfer>
+
+
+---
+
+## `setTimeout` og `setInterval` er ustabilt
+
+Det er ingen garanti for at det tar nøyaktig `16.6ms`
+mellom hver kjøring. På grunn av måten EventLoopen i
+nettleseren fungerer så kan den ligge litt i call stack eller queue
+
+---
+
+<Image src={imgs.repaintDelay} />
+
+<Notes>
+  tegner midt i state-endringer oppfattes som hikke
+</Notes>
+
+---
+
+<Image src={imgs.repaintYank} />
+
+<Notes>
+  Yank som vil oppfattes som at du ligger alltid litt etter.
+  Ikke bra i et livsviktig spill.
+</Notes>
+
+---
+
+## rAF!
+
+`requestAnimationFrame` altså.
+
+<Notes>
+  Løsningen på problemet blir requestAnimationFrame.
+</Notes>
+
+---
+
+<Image
+  src={imgs.crp}
+  style={{
+    backgroundSize: 'contain',
+    backgroundColor: '#fff',
+  }}
+/>
+
+<Notes>
+  Her kan vi koble oss inn på steget som køres før repaint.
+</Notes>
+
+---
+
+<CodeSurfer>
+
+
+```ts
+let someInput = {};
+setInterval(function () {
+  manipulateSomeInput(someInput);
+  draw(someInput);
+}, 1000 / 60); // 60fps
+```
+
+```ts
+let someInput = {};
+function loop() {
+  manipulateSomeInput(someInput);
+  draw(someInput);
+}
+requestAnimationFrame(loop);
+```
+
+```ts subtitle="Rekursivitet"
+let someInput = {};
+function loop() {
+  manipulateSomeInput(someInput);
+  draw(someInput);
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+```
+
+</CodeSurfer>
+
