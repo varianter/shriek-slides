@@ -21,6 +21,7 @@ export const theme = customTheme(dracula);
 import ImageLayout from '../image-split-layout';
 import * as imgs from '../images';
 import VideoUserMedia from '../video-user-media';
+import AudioUserMedia from '../audio-user-media';
 
 <Head>
   <title>Shriek!</title>
@@ -110,7 +111,7 @@ Voila!
 <CodeSurfer>
 
 
-```ts subtitle="I stedet for å be om video"
+```ts subtitle="Og i stedet for å be om video,"
 async function getMediaStream() {
   const mediaStream = await navigator.mediaDevices.getUserMedia(
     {
@@ -120,7 +121,7 @@ async function getMediaStream() {
 }
 ```
 
-```ts subtitle="Se kan du be om audio"
+```ts subtitle="Så kan du be om audio"
 async function getMediaStream() {
   const mediaStream = await navigator.mediaDevices.getUserMedia(
     {
@@ -132,5 +133,89 @@ async function getMediaStream() {
 
 </CodeSurfer>
 
+
+---
+
+## Web Audio API
+
+For å gjøre noe med lyd fra mikronen, kan vi ta i bruk Web Audio API-et
+
+---
+
+<CodeSurfer>
+
+
+```ts subtitle="AudioContext er fundamentet i Web Audio"
+const audioContext = new AudioContext();
+```
+
+```ts subtitle="Vi kan bruke mikrofonen som lydkilde"
+const audioContext = new AudioContext();
+const source = audioContext.createMediaStreamSource(
+  microphoneStream,
+);
+```
+
+```ts subtitle="Prosessering av lyd går igjennom AudioNodes"
+const audioContext = new AudioContext();
+const source = audioContext.createMediaStreamSource(
+  microphoneStream,
+);
+const volumeNode = audioContext.createGain();
+```
+
+```ts subtitle="Så kan du gjøre operasjoner på lyden"
+const audioContext = new AudioContext();
+const source = audioContext.createMediaStreamSource(
+  microphoneStream,
+);
+const volumeNode = audioContext.createGain();
+volumeNode.gain.setValueAtTime(2, audioContext.currentTime);
+```
+
+```ts subtitle="Og du kan analysere lyden"
+const audioContext = new AudioContext();
+const source = audioContext.createMediaStreamSource(
+  microphoneStream,
+);
+const volumeNode = audioContext.createGain();
+volumeNode.gain.setValueAtTime(2, audioContext.currentTime);
+const analyser = audioContext.createAnalyser();
+```
+
+```ts subtitle="Og nodene linkes sammen i AudioContext og rutes ut"
+const audioContext = new AudioContext();
+const source = audioContext.createMediaStreamSource(
+  microphoneStream,
+);
+const volumeNode = audioContext.createGain();
+volumeNode.gain.setValueAtTime(2, audioContext.currentTime);
+const analyser = audioContext.createAnalyser();
+source
+  .connect(volumeNode)
+  .connect(analyser)
+  .connect(audioContext.destination);
+```
+
+</CodeSurfer>
+
+
+<Notes>
+  AudioContext er boksen som inneholder alt av det som skjer
+  av audio-håndtering i Web Audio. Den gjør operasjoner på
+  lyd via det som kalles audio nodes, som kan linkes sammen
+  på en modulær måte for å rute lyden og gjøre operasjoner
+  på den.
+</Notes>
+
+---
+
+<AudioUserMedia />
+
+---
+
+## AudioWorklet
+
+Mandelen i denne grøten
 
 ---
