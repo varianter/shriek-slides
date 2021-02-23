@@ -555,3 +555,172 @@ requestAnimationFrame(loop);
 
 </CodeSurfer>
 
+
+---
+
+## En ting til...
+
+`SVG` og `DOM`!
+
+<Notes>
+
+
+En vanlig måte å lage spill i nettleseren på er å bruke `canvas`.
+Tegne piksel for piksel på et tegnebrett. Vi skal gjøre det litt enklere
+for dette eksemplet derimot. Vi skal bruke ferdig tegnet, uhyre simple,
+former.
+
+Så vi skal bruke SVG-former og manipulere de direkte via DOM og JavaScript.
+
+</Notes>
+
+
+---
+
+<CodeSurferColumns  themes={[github, dracula]} >
+
+
+<Step>
+
+
+```html
+<div id="foo" />
+```
+
+```ts
+const foo = document.querySelector('#foo');
+```
+
+</Step>
+
+
+<Step>
+
+
+```html
+<div id="foo" />
+```
+
+```ts
+const foo = document.querySelector('#foo');
+// foo => <div id="foo" />
+```
+
+</Step>
+
+
+<Step>
+
+
+```html
+<svg xmlns="http://www.w3.org/2000/svg">
+  <path
+    id="player"
+    d="M44 42.6795L74 60L44 77.3205L44 42.6795Z"
+    stroke="black"
+    stroke-width="6"
+  />
+</svg>
+```
+
+```ts
+const foo = document.querySelector('#foo');
+// foo => <div id="foo" />
+```
+
+</Step>
+
+
+<Step>
+
+
+```diff
+
+```
+
+```ts
+const playerPath = document.querySelector('#player');
+// playerPath => <path ... />
+```
+
+</Step>
+
+
+<Step>
+
+
+```diff 6
+
+```
+
+```ts
+const playerPath = document.querySelector('#player');
+playerPath.getAttribute('stroke-width');
+//=> '6'
+```
+
+</Step>
+
+
+<Step>
+
+
+```diff 5
+
+```
+
+```ts
+const playerPath = document.querySelector('#player');
+playerPath.getAttribute('stroke');
+//=> 'black'
+```
+
+</Step>
+
+
+<Step>
+
+
+```html
+<svg xmlns="http://www.w3.org/2000/svg">
+  <path
+    id="player"
+    d="M44 42.6795L74 60L44 77.3205L44 42.6795Z"
+    stroke="black"
+    stroke-width="6"
+  />
+</svg>
+```
+
+```ts
+const playerPath = document.querySelector('#player');
+playerPath.setAttribute('stroke', '#f00');
+```
+
+</Step>
+
+
+<Step>
+
+
+```html
+<svg xmlns="http://www.w3.org/2000/svg">
+  <path
+    id="player"
+    d="M44 42.6795L74 60L44 77.3205L44 42.6795Z"
+    stroke="#f00"
+    stroke-width="6"
+  />
+</svg>
+```
+
+```ts
+const playerPath = document.querySelector('#player');
+playerPath.setAttribute('stroke', '#f00');
+```
+
+</Step>
+
+
+</CodeSurferColumns>
+
