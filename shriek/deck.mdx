@@ -60,7 +60,23 @@ Med programmering i verktøy beltet kan du gjøre det utroligste. På sitt beste
 
 ## User Media
 
-I nettleser API som omhandler "User Media" kan du be om tilgang til kamera eller mikrofon.
+- MediaDevices-API brukes for tilgang til diverse media
+- `getUserMedia` for tilgang til kamera eller mikrofon
+- Krever "Secure Context"
+- Styrer permissions
+
+<Notes>
+ I nettleser-API som omhandler "Media Devices" kan du be om tilgang til kamera eller mikrofon via `getUserMedia`.
+
+
+Dette må lastes i en "secure context", som betyr at det må vanligvis skje via HTTPS. Dette er grunnet personvern, og nettleser vil prøve å sikre at ingen blir spionert på via usikre tilkoblinger. Unntaket fra denne regelen er hvis nettsiden er hostet lokalt, slik som via localhost. Da blir det sett på som en "secure context"
+
+Denne tilgangen til en gitt ressurs, slik som kamera eller mikrofon, håndteres via permissions i nettleser. Som betyr at brukeren kan trekke tilbake tilgang når hen vil, og derfor må løsninger som bruker "user media" være ganske godt skrudd sammen for å håndtere at tilgang skrus av.
+
+Men heldigvis, siden nettleseren tilbyr grensesnittet og funksjonalitet for å justere tilganger, samt hvilke kilder du skal ha tilgang til, så er det ikke mye kode som skal til i dette scenarioet.
+
+  </Notes>
+
 
 ---
 
@@ -104,90 +120,96 @@ Voila!
 
 <VideoUserMedia />
 
-<Notes>More notes</Notes>
-
----
-
-<CodeSurfer>
-
-
-```ts subtitle="Og i stedet for å be om video,"
-async function getMediaStream() {
-  const mediaStream = await navigator.mediaDevices.getUserMedia(
-    {
-      video: true,
-    },
-  );
-}
-```
-
-```ts subtitle="Så kan du be om audio"
-async function getMediaStream() {
-  const mediaStream = await navigator.mediaDevices.getUserMedia(
-    {
-      audio: true,
-    },
-  );
-}
-```
-
-</CodeSurfer>
-
+<Notes>
+  Og koden du så tidligere var bokstavelig talt det som
+  skulle til for å vise video her
+</Notes>
 
 ---
 
 ## Web Audio API
 
-For å gjøre noe med lyd fra mikronen, kan vi ta i bruk Web Audio API-et
+- AudioContext
+- Streams, buffers
+
+<Notes>
+  For å gjøre noe med lyd fra mikronen, kan vi ta i bruk Web
+  Audio API-et
+
+
+Her kommer vi også innom streams og buffers
+
+</Notes>
+
 
 ---
 
 <CodeSurfer>
 
 
+```ts subtitle="I stedet for å be om video,"
+const stream = await navigator.mediaDevices.getUserMedia({
+  video: true,
+});
+```
+
+```ts subtitle="Så kan du be om audio"
+const stream = await navigator.mediaDevices.getUserMedia({
+  audio: true,
+});
+```
+
 ```ts subtitle="AudioContext er fundamentet i Web Audio"
+const stream = await navigator.mediaDevices.getUserMedia({
+  audio: true,
+});
 const audioContext = new AudioContext();
 ```
 
 ```ts subtitle="Vi kan bruke mikrofonen som lydkilde"
+const stream = await navigator.mediaDevices.getUserMedia({
+  audio: true,
+});
 const audioContext = new AudioContext();
-const source = audioContext.createMediaStreamSource(
-  microphoneStream,
-);
+const source = audioContext.createMediaStreamSource(stream);
 ```
 
 ```ts subtitle="Prosessering av lyd går igjennom AudioNodes"
+const stream = await navigator.mediaDevices.getUserMedia({
+  audio: true,
+});
 const audioContext = new AudioContext();
-const source = audioContext.createMediaStreamSource(
-  microphoneStream,
-);
+const source = audioContext.createMediaStreamSource(stream);
 const volumeNode = audioContext.createGain();
 ```
 
 ```ts subtitle="Så kan du gjøre operasjoner på lyden"
+const stream = await navigator.mediaDevices.getUserMedia({
+  audio: true,
+});
 const audioContext = new AudioContext();
-const source = audioContext.createMediaStreamSource(
-  microphoneStream,
-);
+const source = audioContext.createMediaStreamSource(stream);
 const volumeNode = audioContext.createGain();
 volumeNode.gain.setValueAtTime(2, audioContext.currentTime);
 ```
 
 ```ts subtitle="Og du kan analysere lyden"
+const stream = await navigator.mediaDevices.getUserMedia({
+  audio: true,
+});
 const audioContext = new AudioContext();
-const source = audioContext.createMediaStreamSource(
-  microphoneStream,
-);
+const source = audioContext.createMediaStreamSource(stream);
 const volumeNode = audioContext.createGain();
 volumeNode.gain.setValueAtTime(2, audioContext.currentTime);
 const analyser = audioContext.createAnalyser();
 ```
 
 ```ts subtitle="Og nodene linkes sammen i AudioContext og rutes ut"
+const stream = await navigator.mediaDevices.getUserMedia({
+  audio: true,
+});
 const audioContext = new AudioContext();
-const source = audioContext.createMediaStreamSource(
-  microphoneStream,
-);
+const source = audioContext.createMediaStreamSource(stream);
 const volumeNode = audioContext.createGain();
 volumeNode.gain.setValueAtTime(2, audioContext.currentTime);
 const analyser = audioContext.createAnalyser();
@@ -214,8 +236,103 @@ source
 
 ---
 
-## AudioWorklet
-
-Mandelen i denne grøten
+<Image src={imgs.audioContext} />
 
 ---
+
+## AudioWorklet
+
+- En worklet, nesten som en Web Worker
+- Gir tilgang til lavere nivå i render pipeline
+- Brukes når det er behov for mye prosessering
+- Krever "Secure Context"
+
+---
+
+<CodeSurfer>
+
+
+```ts subtitle="Hvis vi har tilgang til mikrofon"
+const stream = await navigator.mediaDevices.getUserMedia({
+  audio: true,
+});
+const audioContext = new AudioContext();
+const source = audioContext.createMediaStreamSource(stream);
+
+source.connect(audioContext.destination);
+```
+
+```ts subtitle="Så kan vi laste inn en audio-worklet"
+const stream = await navigator.mediaDevices.getUserMedia({
+  audio: true,
+});
+const audioContext = new AudioContext();
+const source = audioContext.createMediaStreamSource(stream);
+
+await audioContext.audioWorklet.addModule(
+  './my-worklet.js',
+);
+
+source.connect(audioContext.destination);
+```
+
+```ts subtitle="Så må vi instantiere denne som en egen node"
+const stream = await navigator.mediaDevices.getUserMedia({
+  audio: true,
+});
+const audioContext = new AudioContext();
+const source = audioContext.createMediaStreamSource(stream);
+
+await audioContext.audioWorklet.addModule(
+  './my-worklet.js',
+);
+const workletNode = new AudioWorkletNode(
+  audioContext,
+  'myworklet',
+);
+
+source.connect(audioContext.destination);
+```
+
+```ts subtitle="Og deretter connecte denne på samme måte i pipeline"
+const stream = await navigator.mediaDevices.getUserMedia({
+  audio: true,
+});
+const audioContext = new AudioContext();
+const source = audioContext.createMediaStreamSource(stream);
+
+await audioContext.audioWorklet.addModule(
+  './my-worklet.js',
+);
+const workletNode = new AudioWorkletNode(
+  audioContext,
+  'myworklet',
+);
+
+source
+  .connect(workletNode)
+  .connect(audioContext.destination);
+```
+
+```ts
+const stream = await navigator.mediaDevices.getUserMedia({
+  audio: true,
+});
+const audioContext = new AudioContext();
+const source = audioContext.createMediaStreamSource(stream);
+
+await audioContext.audioWorklet.addModule(
+  './my-worklet.js',
+);
+const workletNode = new AudioWorkletNode(
+  audioContext,
+  'myworklet',
+);
+
+source
+  .connect(workletNode)
+  .connect(audioContext.destination);
+```
+
+</CodeSurfer>
+
