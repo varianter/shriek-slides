@@ -34,10 +34,8 @@ export default function AudioUserMedia() {
         const bufferLength = analyser.frequencyBinCount;
         const dataArray = new Uint8Array(bufferLength);
         analyser.getByteTimeDomainData(dataArray);
-        source
-          .connect(volumeNode)
-          .connect(analyser)
-          .connect(audioContext.destination);
+        source.connect(volumeNode).connect(analyser);
+        // .connect(audioContext.destination);
 
         const canvas = canvasRef.current;
         var canvasCtx = canvas.getContext('2d');

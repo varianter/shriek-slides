@@ -155,6 +155,12 @@ async function getMediaStream() {
 </CodeSurfer>
 
 
+<Notes>
+
+
+</Notes>
+
+
 ---
 
 Voila!
@@ -180,7 +186,9 @@ Voila!
   Audio API-et
 
 
-Her kommer vi også innom streams og buffers
+Her kommer vi også innom streams og buffers, hvor enkelt fortalt er Streams en kontinuerlig strøm av data, slik som fra en mikrofon.
+
+En buffer er i enkleste forstand en array som du sender stream data inn i. Så mao, en buffer kan inneholde et utsnitt av data fra en stream på et gitt tidspunkt
 
 </Notes>
 
@@ -2027,13 +2035,11 @@ peerClient.onData((data) => {
 
 #### Oppgave: PeerJS
 
-```
 Ta i bruk `connectPeer` for å koble til server.
 
 1. connect og send inn Nick.
 1. Tegn vegger, mål og motstandere.
 1. Gi varsel (`window.alert`) om noen vinner.
 1. Send nye kordinater via server.
-```
 
 ---
