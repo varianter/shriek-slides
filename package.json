@@ -8,5 +8,6 @@
   "scripts": {
     "start": "mdx-deck ./shriek/deck.mdx",
     "build": "sh build.sh"
-  }
+  },
+  "dependencies": {}
 }

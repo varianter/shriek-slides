@@ -24,6 +24,8 @@ import VideoUserMedia from '../video-user-media';
 import AudioUserMedia from '../audio-user-media';
 import InputDemo from '../inputer';
 
+import Peers from '../peerjs';
+
 <Head>
   <title>Shriek!</title>
   {Object.values(imgs).map(function (img) {
@@ -131,6 +133,7 @@ Voila!
 ## Web Audio API
 
 - AudioContext
+- Kommuniserer igjennom noder
 - Streams
 - Buffers
 
@@ -234,11 +237,14 @@ source
 
 ---
 
-<AudioUserMedia />
+<Image
+  src={imgs.audioContext}
+  style={{ backgroundSize: '100%' }}
+/>
 
 ---
 
-<Image src={imgs.audioContext} />
+<AudioUserMedia />
 
 ---
 
@@ -419,6 +425,12 @@ source
 
 </CodeSurfer>
 
+
+---
+
+## Oppgave 1: Volume progress (20min)
+
+Implementer uthenting av volum basert på UserMedia, AudioWorklets og bruk `test-volume.ts` for å bekrefte at alt fungerer.
 
 ---
 
@@ -1855,3 +1867,94 @@ requestAnimationFrame(loop);
 ---
 
 ### Pause (10min)
+
+---
+
+### Del 4: P2P, WebRTC og PeerJS (20min)
+
+---
+
+### Peer-to-peer (P2P)
+
+- Peer-to-peer brukes i distribuerte løsninger
+- "Peers" kobler direkte til hverandre
+- Kjente løsninger som bruker P2P: Napster, BitTorrent, Bitcoin
+
+---
+
+### WebRTC
+
+- Web Real-Time Communication
+- Et nettleser-API for å kommunisere peer-to-peer
+- Støtter strømming av audio/video media
+- Støtter også å sende andre data direkte
+
+---
+
+### PeerJS
+
+Et bibliotek som bygger på toppen av WebRTC
+
+---
+
+<Peers />
+
+---
+
+<CodeSurfer>
+
+
+```ts
+import Peer from 'peerjs';
+import {
+  RecieveDataPayload,
+  SendDataPayload,
+} from '../../types';
+const serverId = 'test-shriek-local';
+
+type Listener = (data: RecieveDataPayload) => void;
+export default function connect(onConnect: () => void) {
+  let connIsOpened = false;
+  let conn: Peer.DataConnection = null;
+
+  let listener: Listener = () => {};
+  const peer = new Peer(null, { debug: 2 });
+  peer.on('open', (c) => {
+    conn = peer.connect(serverId);
+    conn.on('open', () => {
+      connIsOpened = true;
+      onConnect();
+    });
+    conn.on('data', listener);
+  });
+
+  return {
+    onData: (cb: Listener) => {
+      listener = cb;
+    },
+    send: (data: SendDataPayload) => {
+      if (connIsOpened) {
+        conn.send(data);
+      }
+    },
+  };
+}
+```
+
+</CodeSurfer>
+
+
+---
+
+#### Oppgave: PeerJS
+
+```
+Ta i bruk `connectPeer` for å koble til server.
+
+1. connect og send inn Nick.
+1. Tegn vegger, mål og motstandere.
+1. Gi varsel (`window.alert`) om noen vinner.
+1. Send nye kordinater via server.
+```
+
+---
