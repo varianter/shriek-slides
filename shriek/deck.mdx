@@ -22,6 +22,7 @@ import ImageLayout from '../image-split-layout';
 import * as imgs from '../images';
 import VideoUserMedia from '../video-user-media';
 import AudioUserMedia from '../audio-user-media';
+import InputDemo from '../inputer';
 
 <Head>
   <title>Shriek!</title>
@@ -884,10 +885,21 @@ playerPath.setAttribute(
 
 ---
 
-## Oppgave (15min)
+## Oppgave 2: Drag race (15min)
 
+```
 1. Lag en enkel render-loop.
-2. Hent ut `#player` fra DOM, bruk Volume fra tidligere til å kjøre `translate()` på Player-elementet.
+2. Hent ut player fra DOM, bruk Volume fra tidligere
+   til å kjøre translateX på Player-elementet.
+```
+
+---
+
+### Pause
+
+---
+
+## Mer transform
 
 ---
 
@@ -1195,3 +1207,371 @@ playerPath.setAttribute(
 
 </CodeSurferColumns>
 
+
+---
+
+## Brukerinput
+
+```
+EventListeners og Events.
+```
+
+---
+
+<CodeSurfer>
+
+
+```ts
+window.document;
+```
+
+```ts
+document;
+```
+
+```ts
+document.querySelector();
+```
+
+```ts
+document.querySelector();
+document.querySelectorAll();
+```
+
+```ts
+document.querySelector();
+document.querySelectorAll();
+document.createElement();
+```
+
+```ts
+document.querySelector();
+document.querySelectorAll();
+document.createElement();
+document.createTextNode();
+```
+
+```ts
+document.querySelector();
+document.querySelectorAll();
+document.createElement();
+document.createTextNode();
+document.addEventListener();
+```
+
+```ts
+document.querySelector();
+document.querySelectorAll();
+document.createElement();
+document.createTextNode();
+document.addEventListener();
+document.removeEventListener();
+```
+
+```ts
+document.querySelector();
+document.querySelectorAll();
+document.createElement();
+document.createTextNode();
+document.addEventListener();
+document.removeEventListener();
+document.body;
+```
+
+```ts
+document.querySelector();
+document.querySelectorAll();
+document.createElement();
+document.createTextNode();
+document.addEventListener();
+document.removeEventListener();
+document.body;
+// ... osv
+```
+
+```diff 5
+
+```
+
+```ts
+document.addEventListener();
+```
+
+</CodeSurfer>
+
+
+---
+
+<CodeSurfer>
+
+
+```ts
+// document.addEventListener(event: string, callback: Function);
+```
+
+```ts
+// document.addEventListener(event: string, callback: Function);
+document.addEventListener('click', () => {
+  console.log('Clicked document');
+});
+```
+
+```ts
+// document.addEventListener(event: string, callback: Function);
+document.addEventListener('click', (ev: MouseEvent) => {
+  console.log('Clicked document');
+});
+```
+
+```ts
+// document.addEventListener(event: string, callback: Function);
+document.addEventListener('click', (ev: MouseEvent) => {
+  console.log('Clicked item', ev.target);
+});
+```
+
+```ts
+// document.addEventListener(event: string, callback: Function);
+document.addEventListener(
+  'keydown',
+  (ev: KeyboardEvent) => {
+    console.log('Key down');
+  },
+);
+```
+
+```ts
+// document.addEventListener(event: string, callback: Function);
+document.addEventListener(
+  'keydown',
+  (ev: KeyboardEvent) => {
+    console.log('Key down', ev.key);
+  },
+);
+```
+
+```ts
+// document.addEventListener(event: string, callback: Function);
+document.addEventListener(
+  'keydown',
+  (ev: KeyboardEvent) => {
+    console.log('Key down', ev.key);
+  },
+);
+//=> Key down d
+```
+
+```ts
+// document.addEventListener(event: string, callback: Function);
+document.addEventListener(
+  'keydown',
+  (ev: KeyboardEvent) => {
+    console.log('Key down', ev.key);
+  },
+);
+//=> Key down d
+//=> Key down s
+```
+
+```ts
+// document.addEventListener(event: string, callback: Function);
+document.addEventListener(
+  'keydown',
+  (ev: KeyboardEvent) => {
+    console.log('Key down', ev.key);
+  },
+);
+//=> Key down d
+//=> Key down s
+//=> Key down a
+```
+
+```ts
+// document.addEventListener(event: string, callback: Function);
+document.addEventListener(
+  'keydown',
+  (ev: KeyboardEvent) => {
+    console.log('Key down', ev.key);
+  },
+);
+//=> Key down d
+//=> Key down s
+//=> Key down a
+//=> Key down Shift
+```
+
+```ts
+// document.addEventListener(event: string, callback: Function);
+document.addEventListener(
+  'keydown',
+  (ev: KeyboardEvent) => {
+    console.log('Key down', ev.key);
+  },
+);
+//=> Key down d
+//=> Key down s
+//=> Key down a
+//=> Key down Shift
+//=> Key down D
+```
+
+```ts
+// document.addEventListener(event: string, callback: Function);
+document.addEventListener(
+  'keydown',
+  (ev: KeyboardEvent) => {
+    console.log('Key down', ev.key);
+  },
+);
+//=> Key down d
+//=> Key down s
+//=> Key down a
+//=> Key down Shift
+//=> Key down D
+//=> Key down S
+```
+
+```ts
+// document.addEventListener(event: string, callback: Function);
+document.addEventListener(
+  'keydown',
+  (ev: KeyboardEvent) => {
+    console.log('Key down', ev.key);
+  },
+);
+//=> Key down d
+//=> Key down s
+//=> Key down a
+//=> Key down Shift
+//=> Key down D
+//=> Key down S
+//=> Key down A
+```
+
+```ts
+// document.addEventListener(event: string, callback: Function);
+document.addEventListener('keyup', (ev: KeyboardEvent) => {
+  console.log('Key up', ev.key);
+});
+//=> Key down d
+//=> Key down s
+//=> Key down a
+//=> Key down Shift
+//=> Key down D
+//=> Key down S
+//=> Key down A
+```
+
+</CodeSurfer>
+
+
+---
+
+<CodeSurferColumns  themes={[github, dracula]} >
+
+
+<Step>
+
+
+<InputDemo />
+
+```ts
+let active = '';
+document.addEventListener('keyup', (ev) => {
+  active = ev.key;
+});
+document.addEventListener('keyDown', () => {
+  active = '';
+});
+```
+
+</Step>
+
+
+<Step>
+
+
+<InputDemo />
+
+```ts
+let active = '';
+document.addEventListener('keydown', (ev) => {
+  active = ev.key;
+});
+document.addEventListener('keyup', () => {
+  active = '';
+});
+
+function loop() {
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+```
+
+</Step>
+
+
+<Step>
+
+
+<InputDemo />
+
+```ts
+let active = '';
+document.addEventListener('keydown', (ev) => {
+  active = ev.key;
+});
+document.addEventListener('keyup', () => {
+  active = '';
+});
+
+const div = document.querySelector('#output');
+function loop() {
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+```
+
+</Step>
+
+
+<Step>
+
+
+<InputDemo />
+
+```ts
+let active = '';
+document.addEventListener('keydown', (ev) => {
+  active = ev.key;
+});
+document.addEventListener('keyup', () => {
+  active = '';
+});
+
+const div = document.querySelector('#output');
+function loop() {
+  div.textContent = active;
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+```
+
+</Step>
+
+
+</CodeSurferColumns>
+
+
+---
+
+## Oppgave 3: Event Listeners (10min)
+
+```
+1. Lag en ControlInput modul som holder
+   tilstand på venstre/høyre.
+2. Bruk cart.updateByVolume til å hente ut
+   ny x, y, og degrees.
+3. bruk transform basert på resultat.
+4. Kjør cart!
+```
