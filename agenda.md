@@ -27,7 +27,7 @@ Implementer uthenting av volum basert på UserMedia, AudioWorklets og bruk `test
 #### Oppgave (15min)
 
 1. Lag en enkel render-loop.
-2. Hent ut `player` fra DOM, bruk Volume fra tidligere til å kjøre `translateX` på Player-elementet.
+2. Hent ut `player` fra DOM, bruk Volume fra tidligere til å kjøre `translate` på Player-elementet.
 
 ### Del 3: EventListeners (5-10min)
 

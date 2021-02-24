@@ -754,6 +754,143 @@ playerPath.setAttribute('stroke', '#f00');
 
 ---
 
+## Transform
+
+---
+
+<CodeSurferColumns  themes={[github, dracula]} >
+
+
+<Step>
+
+
+```html
+<svg xmlns="http://www.w3.org/2000/svg">
+  <path
+    id="player"
+    d="M44 42.6795L74 60L44 77.3205L44 42.6795Z"
+    stroke="#f00"
+    stroke-width="6"
+  />
+</svg>
+```
+
+<svg xmlns="http://www.w3.org/2000/svg">
+  <path
+    id="player"
+    d="M44 42.6795L74 60L44 77.3205L44 42.6795Z"
+    stroke="#f00"
+    stroke-width="6"
+    style={{ transition: 'all 1s ease-in' }}
+  />
+</svg>
+
+</Step>
+
+
+<Step>
+
+
+```html
+<svg xmlns="http://www.w3.org/2000/svg">
+  <path
+    id="player"
+    d="M44 42.6795L74 60L44 77.3205L44 42.6795Z"
+    stroke="#f00"
+    stroke-width="6"
+    transform="translate(100, 0)"
+  />
+</svg>
+```
+
+<svg xmlns="http://www.w3.org/2000/svg">
+  <path
+    id="player"
+    d="M44 42.6795L74 60L44 77.3205L44 42.6795Z"
+    stroke="#f00"
+    stroke-width="6"
+    style={{ transition: 'all 1s ease-in' }}
+    transform="translate(100, 0)"
+  />
+</svg>
+
+</Step>
+
+
+<Step>
+
+
+```html
+<svg xmlns="http://www.w3.org/2000/svg">
+  <path
+    id="player"
+    d="M44 42.6795L74 60L44 77.3205L44 42.6795Z"
+    stroke="#f00"
+    stroke-width="6"
+    transform="translate(150, 0)"
+  />
+</svg>
+```
+
+<svg xmlns="http://www.w3.org/2000/svg">
+  <path
+    id="player"
+    d="M44 42.6795L74 60L44 77.3205L44 42.6795Z"
+    stroke="#f00"
+    stroke-width="6"
+    style={{ transition: 'all 1s ease-in' }}
+    transform="translate(150, 0)"
+  />
+</svg>
+
+</Step>
+
+
+</CodeSurferColumns>
+
+
+---
+
+<CodeSurferColumns  themes={[github, dracula]} >
+
+
+<Step>
+
+
+```html
+<svg xmlns="http://www.w3.org/2000/svg">
+  <path
+    id="player"
+    d="M44 42.6795L74 60L44 77.3205L44 42.6795Z"
+    stroke="#f00"
+    stroke-width="6"
+  />
+</svg>
+```
+
+```ts
+const playerPath = document.querySelector('#player');
+playerPath.setAttribute(
+  'transform',
+  `translate(${xValue}, 0)`,
+);
+```
+
+</Step>
+
+
+</CodeSurferColumns>
+
+
+---
+
+## Oppgave (15min)
+
+1. Lag en enkel render-loop.
+2. Hent ut `#player` fra DOM, bruk Volume fra tidligere til å kjøre `translate()` på Player-elementet.
+
+---
+
 <CodeSurferColumns  themes={[github, dracula]} >
 
 
