@@ -7,3 +7,4 @@ export { default as repaintFaded } from './assets/repaint-faded.png';
 export { default as eventloop } from './assets/eventloop.gif';
 export { default as repaintDelay } from './assets/repaint-delay.png';
 export { default as repaintYank } from './assets/repaint-yank.png';
+export { default as demo } from './assets/demo.png';
