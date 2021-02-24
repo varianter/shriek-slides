@@ -1565,7 +1565,191 @@ requestAnimationFrame(loop);
 
 ---
 
-## Oppgave 3: Event Listeners (10min)
+## Svinging er ikke helt rett frem.
+
+---
+
+<CodeSurfer>
+
+
+```ts
+const player = document.querySelector('#player');
+function loop() {
+  const transform = `translate(${volume}, 0)`;
+  player.setAttribute('transform', transform);
+
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+```
+
+```ts
+const player = document.querySelector('#player');
+function loop() {
+  const transform = `translate(${x}, ${y}) rotate(${degrees})`;
+  player.setAttribute('transform', transform);
+
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+```
+
+```ts
+const player = document.querySelector('#player');
+let x, y, degrees;
+function loop() {
+  // pressed Left or pressed Right
+
+  const transform = `translate(${x}, ${y}) rotate(${degrees})`;
+  player.setAttribute('transform', transform);
+
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+```
+
+```ts
+const player = document.querySelector('#player');
+let x, y, degrees;
+function loop() {
+  // pressed Left or pressed Right
+  x = volume * ???;
+  y = volume * ???;
+
+  const transform = `translate(${x}, ${y}) rotate(${degrees})`;
+  player.setAttribute('transform', transform);
+
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+```
+
+```ts
+const player = document.querySelector('#player');
+let x, y, degrees;
+function loop() {
+  // pressed Left or pressed Right
+  degrees = ???;
+  x = volume * ???;
+  y = volume * ???;
+
+  const transform = `translate(${x}, ${y}) rotate(${degrees})`;
+  player.setAttribute('transform', transform);
+
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+```
+
+```ts
+const player = document.querySelector('#player');
+let x, y, degrees;
+function loop() {
+  // pressed Left or pressed Right
+  if (isLeft) {
+    degrees -= 0.04 * Math.PI;
+  }
+  x = volume * ???;
+  y = volume * ???;
+
+  const transform = `translate(${x}, ${y}) rotate(${degrees})`;
+  player.setAttribute('transform', transform);
+
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+```
+
+```ts
+const player = document.querySelector('#player');
+let x, y, degrees;
+function loop() {
+  // pressed Left or pressed Right
+  if (isLeft) {
+    degrees -= 0.04 * Math.PI;
+  }
+  if (isRight) {
+    degrees += 0.04 * Math.PI;
+  }
+  x = volume * ???;
+  y = volume * ???;
+
+  const transform = `translate(${x}, ${y}) rotate(${degrees})`;
+  player.setAttribute('transform', transform);
+
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+```
+
+```ts
+const player = document.querySelector('#player');
+let x, y, degrees;
+function loop() {
+  // pressed Left or pressed Right
+  if (isLeft) {
+    degrees -= 0.04 * Math.PI;
+  }
+  if (isRight) {
+    degrees += 0.04 * Math.PI;
+  }
+  x = TRIGONOMETRI;
+  y = TRIGONOMETRI;
+
+  const transform = `translate(${x}, ${y}) rotate(${degrees})`;
+  player.setAttribute('transform', transform);
+
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+```
+
+```ts
+const player = document.querySelector('#player');
+const cart = new Cart(player, world);
+function loop() {
+  const transform = `translate(${x}, ${y}) rotate(${degrees})`;
+  player.setAttribute('transform', transform);
+
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+```
+
+```ts
+const player = document.querySelector('#player');
+const cart = new Cart(player, world);
+function loop() {
+  const pos = cart.updateByVolume(LEFT, RIGHT, VOLUME);
+  // ...
+  const transform = `translate(${x}, ${y}) rotate(${degrees})`;
+  player.setAttribute('transform', transform);
+
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+```
+
+```ts
+const player = document.querySelector('#player');
+const cart = new Cart(player, world);
+function loop() {
+  const pos = cart.updateByVolume(LEFT, RIGHT, VOLUME);
+  // ...
+  const transform = `translate(${x}, ${y}) rotate(${degrees})`;
+  player.setAttribute('transform', transform);
+
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+```
+
+</CodeSurfer>
+
+
+---
+
+## Oppgave 3: Event Listeners og kjøring (10min)
 
 ```
 1. Lag en ControlInput modul som holder
@@ -1575,3 +1759,7 @@ requestAnimationFrame(loop);
 3. bruk transform basert på resultat.
 4. Kjør cart!
 ```
+
+---
+
+### Pause (10min)
