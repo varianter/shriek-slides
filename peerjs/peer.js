@@ -9,7 +9,7 @@ export default function Peer(props) {
 
   return (
     <div>
-      <span>Peer: {name} </span>
+      <span>Peer: {name}</span>
       <div>
         <button onClick={() => setMessage('Ping')}>
           Send ping

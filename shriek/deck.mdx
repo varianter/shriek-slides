@@ -1882,6 +1882,10 @@ requestAnimationFrame(loop);
 
 ---
 
+<Peers />
+
+---
+
 ### WebRTC
 
 - Web Real-Time Communication
@@ -1894,10 +1898,6 @@ requestAnimationFrame(loop);
 ### PeerJS
 
 Et bibliotek som bygger på toppen av WebRTC
-
----
-
-<Peers />
 
 ---
 
@@ -1939,6 +1939,47 @@ export default function connect(onConnect: () => void) {
     },
   };
 }
+```
+
+```diff 9[1:31] subtitle="Vårt PeerJS-lib tilbyr en connect-funksjon"
+
+```
+
+```diff 9[33:53] subtitle="Hvor du kan sende inn en funksjon som kjøres ved oppkobling"
+
+```
+
+```diff 24:33 subtitle="Og den returnerer et objekt med to funksjoner"
+
+```
+
+</CodeSurfer>
+
+
+---
+
+<CodeSurfer>
+
+
+```ts
+const peerClient = connectPeer(() => {
+  peerClient.send({ type: 'nick', payload: 'Donkey' });
+});
+peerClient.onData((data) => {
+  switch (data.type) {
+    case 'walls':
+      return world.drawWalls(data.payload);
+    case 'goal':
+      return world.drawGoal(data.payload);
+    case 'update-opponents':
+      return world.updateOpponents(data.payload);
+    case 'remove-opponents':
+      return world.removeOpponents(data.payload);
+    case 'winner':
+      alert('Winner!!\n The winner is... ' + data.payload);
+      return cart.reset();
+  }
+});
 ```
 
 </CodeSurfer>
