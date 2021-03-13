@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "mdx-deck ./shriek/deck.mdx",
-    "build": "sh build.sh"
+    "build": "mdx-deck build ./shriek/deck.mdx"
   },
   "dependencies": {}
 }
