@@ -1926,6 +1926,16 @@ requestAnimationFrame(loop);
 - "Peers" kobler direkte til hverandre
 - Kjente løsninger som bruker P2P: Napster, BitTorrent, Bitcoin
 
+<Notes>
+  Peer-to-peer brukes i distribuerte systemer hvor forskjellige klienter, også kalt peers, kan snakke direkte med hverandre uten å gå igjennom en sentral server/part.
+
+
+Peers kobler sammens, og kan sende arbitrær data til
+hverandre.
+
+</Notes>
+
+
 ---
 
 <Peers />
@@ -1944,6 +1954,53 @@ requestAnimationFrame(loop);
 ### PeerJS
 
 Et bibliotek som bygger på toppen av WebRTC
+
+---
+
+<CodeSurfer>
+
+
+```ts
+import Peer from 'peerjs';
+
+const peer = new Peer(null);
+peer.on('open', (c) => {
+  const conn = peer.connect(serverId);
+  conn.on('open', () => {
+    console.log('Connected to another peer!');
+  });
+  conn.on('data', (data) =>
+    console.log('Received data from another peer: ', data),
+  );
+});
+```
+
+```diff 1
+
+```
+
+```diff 3
+
+```
+
+```diff 4,12
+
+```
+
+```diff 5
+
+```
+
+```diff 6:8
+
+```
+
+```diff 9:11
+
+```
+
+</CodeSurfer>
+
 
 ---
 
