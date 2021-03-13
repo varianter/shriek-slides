@@ -1617,10 +1617,10 @@ document.addEventListener('keyup', (ev: KeyboardEvent) => {
 
 ```ts
 let active = '';
-document.addEventListener('keyup', (ev) => {
+document.addEventListener('keydown', (ev) => {
   active = ev.key;
 });
-document.addEventListener('keyDown', () => {
+document.addEventListener('keyup', () => {
   active = '';
 });
 ```
