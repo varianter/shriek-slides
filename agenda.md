@@ -23,25 +23,19 @@ Implementer uthenting av volum basert på UserMedia, AudioWorklets og bruk `test
 - Kort om DOM
   - `querySelector` vs `querySelectorAll`.
   - Attributes, CSS og transforms.
-
-#### Oppgave (15min)
-
-1. Lag en enkel render-loop.
-2. Hent ut `player` fra DOM, bruk Volume fra tidligere til å kjøre `translate` på Player-elementet.
-
-### Del 3: EventListeners (5-10min)
-
 - `addEventListener` og Events.
   - `keyCode`, `key`
 - Eksempel: Vis "aktive bokstaver"
 - Vis `cart` og `cart.updateByVolume`.
 
-#### Oppgave (10min)
+#### Oppgave (30min)
 
-1. Lag en `ControlInput` modul som holder tilstand på venstre/høyre.
-2. Bruk `cart.updateByVolume` til å hente ut ny `x`, `y`, og `degrees`.
-3. bruk `transform` basert på resultat.
-4. Kjør cart!
+1. Lag en enkel render-loop.
+2. Hent ut `player` fra DOM, bruk Volume fra tidligere til å kjøre `translate` på Player-elementet.
+3. Lag en `ControlInput` modul som holder tilstand på venstre/høyre.
+4. Bruk `cart.updateByVolume` til å hente ut ny `x`, `y`, og `degrees`.
+5. bruk `transform` basert på resultat.
+6. Kjør cart!
 
 ### Pause (10min)
 
