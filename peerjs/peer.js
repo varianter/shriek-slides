@@ -1,11 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 export default function Peer(props) {
   const { message, setMessage, name } = props;
 
   useEffect(() => {
     if (message === 'Ping') setMessage('Pong');
-  }, message);
+  }, [message, setMessage]);
 
   return (
     <div>

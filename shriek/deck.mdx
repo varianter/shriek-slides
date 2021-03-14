@@ -91,9 +91,9 @@ Med programmering i verktøy beltet kan du gjøre det utroligste. På sitt beste
 ```
 
 Del 1: `getUserMedia`, `AudioContext` og volum.
-Del 2: Render Loops, User input og transform
-Del 3: EventListeners
-Del 4: P2P, WebRTC og PeerJS
+Del 2: Render Loops, User input,
+       transform og EventListeners
+Del 3: P2P, WebRTC og PeerJS
 
 ```
 
@@ -579,20 +579,8 @@ Det betyr at vi skal gjøre endringer `1000ms/60 = 16ms`.
 
 ---
 
-<Image src={imgs.eventloop} />
-
----
-
 <CodeSurfer>
 
-
-```ts
-let someInput = {};
-while (true) {
-  manipulateSomeInput(someInput);
-  draw(someInput);
-}
-```
 
 ```ts
 let someInput = {};
@@ -600,14 +588,6 @@ setInterval(function () {
   manipulateSomeInput(someInput);
   draw(someInput);
 }, 1000 / 60); // 60fps
-```
-
-```diff subtitle="👍?"
-
-```
-
-```diff subtitle="👎!"
-
 ```
 
 </CodeSurfer>
@@ -939,7 +919,7 @@ playerPath.setAttribute('stroke', '#f00');
     d="M44 42.6795L74 60L44 77.3205L44 42.6795Z"
     stroke="#f00"
     stroke-width="6"
-    transform="translate(100, 0)"
+    transform="translate(50, 0)"
   />
 </svg>
 ```
@@ -951,122 +931,7 @@ playerPath.setAttribute('stroke', '#f00');
     stroke="#f00"
     stroke-width="6"
     style={{ transition: 'all 1s ease-in' }}
-    transform="translate(100, 0)"
-  />
-</svg>
-
-</Step>
-
-
-<Step>
-
-
-```html
-<svg xmlns="http://www.w3.org/2000/svg">
-  <path
-    id="player"
-    d="M44 42.6795L74 60L44 77.3205L44 42.6795Z"
-    stroke="#f00"
-    stroke-width="6"
-    transform="translate(150, 0)"
-  />
-</svg>
-```
-
-<svg xmlns="http://www.w3.org/2000/svg">
-  <path
-    id="player"
-    d="M44 42.6795L74 60L44 77.3205L44 42.6795Z"
-    stroke="#f00"
-    stroke-width="6"
-    style={{ transition: 'all 1s ease-in' }}
-    transform="translate(150, 0)"
-  />
-</svg>
-
-</Step>
-
-
-</CodeSurferColumns>
-
-
----
-
-<CodeSurferColumns  themes={[github, dracula]} >
-
-
-<Step>
-
-
-```html
-<svg xmlns="http://www.w3.org/2000/svg">
-  <path
-    id="player"
-    d="M44 42.6795L74 60L44 77.3205L44 42.6795Z"
-    stroke="#f00"
-    stroke-width="6"
-  />
-</svg>
-```
-
-```ts
-const playerPath = document.querySelector('#player');
-playerPath.setAttribute(
-  'transform',
-  `translate(${xValue}, 0)`,
-);
-```
-
-</Step>
-
-
-</CodeSurferColumns>
-
-
----
-
-## Oppgave 2: Drag race (15min)
-
-```
-1. Lag en enkel render-loop.
-2. Hent ut player fra DOM, bruk Volume fra tidligere
-   til å kjøre translateX på Player-elementet.
-```
-
----
-
-### Pause
-
----
-
-## Mer transform
-
----
-
-<CodeSurferColumns  themes={[github, dracula]} >
-
-
-<Step>
-
-
-```html
-<svg xmlns="http://www.w3.org/2000/svg">
-  <path
-    id="player"
-    d="M44 42.6795L74 60L44 77.3205L44 42.6795Z"
-    stroke="#f00"
-    stroke-width="6"
-  />
-</svg>
-```
-
-<svg xmlns="http://www.w3.org/2000/svg">
-  <path
-    id="player"
-    d="M44 42.6795L74 60L44 77.3205L44 42.6795Z"
-    stroke="#f00"
-    stroke-width="6"
-    style={{ transition: 'all 1s ease-in' }}
+    transform="translate(50, 0)"
   />
 </svg>
 
@@ -1360,10 +1225,6 @@ EventListeners og Events.
 
 <CodeSurfer>
 
-
-```ts
-window.document;
-```
 
 ```ts
 document;
@@ -1761,8 +1622,8 @@ const player = document.querySelector('#player');
 let x, y, degrees;
 function loop() {
   // pressed Left or pressed Right
-  x = volume * ???;
-  y = volume * ???;
+  x = volume * '???';
+  y = volume * '???';
 
   const transform = `translate(${x}, ${y}) rotate(${degrees})`;
   player.setAttribute('transform', transform);
@@ -1777,9 +1638,9 @@ const player = document.querySelector('#player');
 let x, y, degrees;
 function loop() {
   // pressed Left or pressed Right
-  degrees = ???;
-  x = volume * ???;
-  y = volume * ???;
+  degrees = '???';
+  x = volume * '???';
+  y = volume * '???';
 
   const transform = `translate(${x}, ${y}) rotate(${degrees})`;
   player.setAttribute('transform', transform);
@@ -1797,8 +1658,8 @@ function loop() {
   if (isLeft) {
     degrees -= 0.04 * Math.PI;
   }
-  x = volume * ???;
-  y = volume * ???;
+  x = volume * '???';
+  y = volume * '???';
 
   const transform = `translate(${x}, ${y}) rotate(${degrees})`;
   player.setAttribute('transform', transform);
@@ -1819,8 +1680,8 @@ function loop() {
   if (isRight) {
     degrees += 0.04 * Math.PI;
   }
-  x = volume * ???;
-  y = volume * ???;
+  x = volume * '???';
+  y = volume * '???';
 
   const transform = `translate(${x}, ${y}) rotate(${degrees})`;
   player.setAttribute('transform', transform);
@@ -1897,26 +1758,27 @@ requestAnimationFrame(loop);
 
 ---
 
-## Oppgave 3: Event Listeners og kjøring (10min)
+## Oppgave 2: Kjør (30min)
 
 ```
-1. Lag en ControlInput modul som holder
+1. Lag en enkel render-loop.
+2. Lag en ControlInput modul som holder
    tilstand på venstre/høyre.
-2. Bruk cart.updateByVolume til å hente ut
+3. Bruk cart.updateByVolume til å hente ut
    ny x, y, og degrees.
-3. bruk transform basert på resultat.
-4. Kjør cart!
+4. bruk transform basert på resultat.
+5. Kjør cart!
 
 (Om du tør: Skriv updateByVolume logikk selv)
 ```
 
 ---
 
-### Pause (10min)
+### Pause (15min)
 
 ---
 
-### Del 4: P2P, WebRTC og PeerJS (20min)
+### Del 3: P2P, WebRTC og PeerJS (20min)
 
 ---
 
